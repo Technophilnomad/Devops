@@ -28,6 +28,6 @@ jobs:
       - name: checkout ${{ github.repository }}
         uses: actions/checkout@v3
         with:
-          repository: technophilnomad/$repo
+          repository: technophilnomad/${{ github.event.inputs.repoBranch }}
 
 
