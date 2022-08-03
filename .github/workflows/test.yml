@@ -1,0 +1,14 @@
+name: Initial pipeline
+
+on: 
+  workflow_dispatch:
+  push:
+    branches:
+      - "dev"
+
+jobs:
+  setup:
+    name: setup the environment
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "helllo world" 
