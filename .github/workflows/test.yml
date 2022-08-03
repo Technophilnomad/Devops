@@ -22,11 +22,11 @@ jobs:
   setup:
     name: setup the environment
     runs-on: ubuntu-latest
-    
     steps:
       - run: echo "helllo $repo  $branch"
-
-      - uses: actions/checkout@v3
+      - name: checkout ${{ github.repository }}
+        uses: actions/checkout@v3
         with:
-          repository: technophilnomad/${{ github.events.inputs.repoBranch }}
+          repository: technophilnomad/devops
+
 
