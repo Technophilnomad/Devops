@@ -14,13 +14,5 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - run: echo "helllo world" 
-    
-  Checkout:
-    steps:
-    - uses: actions/checkout@v3
-      with:
-        repository : technophilnomad/$repo
-        ref: $branch
-
+      - run: echo "helllo {{$repo}}  {{$branch}}
 
