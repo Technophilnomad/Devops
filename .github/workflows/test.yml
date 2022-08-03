@@ -15,11 +15,12 @@ on:
   push:
     branches:
       - "dev"
-env: 
-  repo: devops
-  branch: dev
+
 jobs:
   setup:
+    env: 
+      repo: devops
+      branch: dev
     name: setup the environment
     runs-on: ubuntu-latest
     steps:
@@ -27,6 +28,6 @@ jobs:
       - name: checkout ${{ github.repository }}
         uses: actions/checkout@v3
         with:
-          repository: technophilnomad/${{ repo }}
+          repository: technophilnomad/$repo
 
 
