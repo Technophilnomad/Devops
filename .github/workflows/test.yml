@@ -1,18 +1,7 @@
 name: Initial pipeline
 
 on: 
-  workflow_dispatch:
-    inputs:
-      repoBranch:
-        description: Select a branch for the workflow
-        type: choice
-        options:
-        - main
-        - dev
-        - feature
-        - devops
-        default: devops
-
+  workflow_dispatch: {}
   push:
     branches:
       - "dev"
