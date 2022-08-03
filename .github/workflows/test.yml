@@ -10,6 +10,7 @@ on:
         - main
         - dev
         - feature
+        - devops
         default: devops
 
   push:
