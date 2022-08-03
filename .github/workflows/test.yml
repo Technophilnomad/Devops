@@ -27,6 +27,6 @@ jobs:
       - name: checkout ${{ github.repository }}
         uses: actions/checkout@v3
         with:
-          repository: technophilnomad/devops
+          repository: technophilnomad/$repo
 
 
