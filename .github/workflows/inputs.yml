@@ -38,7 +38,7 @@ jobs:
       repo: devops
       branch: dev
       InpRepoName: format(${{ github.event.inputs.vmRepo }})
-      RepoName: 'siterx-referral-console'
+      RepoName: 'siterx-webapp'
       
     name: Conditionally Run
     runs-on: ubuntu-latest
