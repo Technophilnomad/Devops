@@ -22,9 +22,9 @@ on:
          - siterx-encryption-service
          - siterx-document-handler
          - siterx-ehr-patient-rpt-upload
-      Action:
+      action:
         description: Choose an action to perform
-        type: Choice
+        type: choice
         default: Build
         options:
          - Build
