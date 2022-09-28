@@ -37,7 +37,7 @@ jobs:
       backend : '["siterx-webapp", "siterx-shorty-console"]'
       repo: devops
       branch: dev
-      InpRepoName: format(${{ github.event.inputs.vmRepo }})
+      InpRepoName: ${{ github.event.inputs.vmRepo }}
       FrontendRepoName: 'siterx-annotator'
       BackendRepoName: 'siterx-shorty-console'
       
