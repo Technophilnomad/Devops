@@ -42,8 +42,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo ${{ github.events.env.frontend }}
-      - if:   contains(env.frontend, ${{ github.event.inputs.vmRepo }})
-        run:  echo ${{ github.event.inputs.vmRepo }}" is frontend"
-      - if: contains(env.backend, ${{ github.event.inputs.vmRepo }})
-        run: echo ${{ github.event.inputs.vmRepo }}" is a backend app"
+      - if:   contains(env.frontend, 'siterx-webapp')
+        run:  echo 'siterx-webapp' is frontend"
+      - if: contains(env.backend, 'siterx-webapp')
+        run: echo 'siterx-webapp' is a backend app"
   
