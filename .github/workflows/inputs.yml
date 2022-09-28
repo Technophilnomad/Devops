@@ -26,8 +26,8 @@ on:
         description: Choose an action to perform
         type: Choice
         options:
-          - Build
-          - Deploy
+         - Build
+         - Deploy
 jobs:
   setup:
     env: 
