@@ -36,7 +36,7 @@ jobs:
     name: setup the environment
     runs-on: ubuntu-latest
     steps:
-      - run: echo "helllo $repo  $branch ${{ github.event.inputs.vmEnv }}"
+      - run: echo "helllo $repo  $branch ${{ github.event.inputs.vmRepo }}"
       - name: checkout ${{ github.repository }}
         uses: actions/checkout@v3
         with:
