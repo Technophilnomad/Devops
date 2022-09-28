@@ -34,12 +34,12 @@ jobs:
   setup:
     env: 
       frontend : '["siterx-referral-console","siterx-annotator","siterx-trial-site-console"]'
-      backend : '["siterx-webapp", "siterx-shorty-console"]'
+      backend : '["siterx-webapp", "siterx-shorty-backend"]'
       repo: devops
       branch: dev
       InpRepoName: ${{ github.event.inputs.vmRepo }}
       FrontendRepoName: 'siterx-annotator'
-      BackendRepoName: 'siterx-shorty-console'
+      BackendRepoName: 'siterx-shorty-backend'
       
     name: Conditionally Run
     runs-on: ubuntu-latest
