@@ -42,11 +42,15 @@ jobs:
     name: Conditionally Run
     runs-on: ubuntu-latest
     steps:
+      #!
       - if:   contains(env.frontend, env.InpRepoName)
-        run:  echo $InpRepoName "is frontend"
+        run:  echo $InpRepoName "is frontend with env.InpRepoName"
+        # working
       - if:   contains(env.frontend, format(${{ github.event.inputs.vmRepo }}))
         run:  echo ${{ github.event.inputs.vmRepo }} "is frontend"  
       - if:   contains(env.frontend, '$InpRepoName')
+        run:  echo $InpRepoName "is frontend"
+      - if:   contains(env.frontend, $InpRepoName)
         run:  echo $InpRepoName "is frontend"
       
         
