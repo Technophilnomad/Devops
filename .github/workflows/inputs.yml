@@ -43,7 +43,7 @@ jobs:
     steps:
       - run: echo ${{ github.events.env.frontend }}
       - if:   contains(env.frontend, ${{ github.event.inputs.vmRepo }})
-        run:  echo "siterx-referral-console is frontend"
+        run:  echo ${{ github.event.inputs.vmRepo }}" is frontend"
       - if: contains(env.backend, ${{ github.event.inputs.vmRepo }})
-        run: echo "siterx-webapp is a backend app"
+        run: echo ${{ github.event.inputs.vmRepo }}" is a backend app"
   
