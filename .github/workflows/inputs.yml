@@ -25,7 +25,7 @@ on:
       action:
         description: Choose an action to perform
         type: choice
-        default: Build
+        default: ${{ github.event.inputs.vmRepo }}
         options:
          - Build
          - Deploy
