@@ -1,0 +1,30 @@
+name: Testing workflow dispatch input
+
+on:
+  workflow_dispatch:
+    inputs:
+      vmRepo:
+        description: Choose a source SiteRx Repo to checkout.
+        type: choice
+        options:
+         - FRONTEND
+         - siterx-referral-console
+         - siterx-annotator
+         - siterx-trial-site-console
+         - siterx-site-console
+         - siterx-super-admin
+         - siterx-payments
+         - siterx-shorty-console
+         - BACKEND
+         - siterx-webapp
+         - siterx-shorty-backend
+         - siterx-ehr-patient-extractor
+         - siterx-encryption-service
+         - siterx-document-handler
+         - siterx-ehr-patient-rpt-upload
+      Action:
+        description: Choose an action to perform
+        type: Choice
+        options:
+          - Build
+          - Deploy
