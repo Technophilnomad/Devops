@@ -37,14 +37,15 @@ jobs:
       backend : '["siterx-webapp", "siterx-shorty-console"]'
       repo: devops
       branch: dev
+      InpRepoName: ${{ github.event.inputs.vmRepo }}
       
     name: Conditionally Run
     runs-on: ubuntu-latest
     steps:
       - run: echo ${{ github.events.env.frontend }}
       - run: echo ${{ github.event.inputs.vmRepo }}
-      - if:   contains(env.frontend, 'siterx-referral-console')
-        run:  echo siterx-referral-console is frontend
-      - if: contains(env.backend, 'siterx-referral-console')
-        run: echo siterx-referral-console is a backend app
+      - if:   contains(env.frontend, $env.InpRepoName)
+        run:  echo $env.InpRepoName is frontend
+      - if: contains(env.backend, $env.InpRepoName)
+        run: echo $env.InpRepoName is a backend app
   
