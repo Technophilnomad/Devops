@@ -41,7 +41,7 @@ jobs:
     name: Conditionally Run
     runs-on: ubuntu-latest
     steps:
-      - run: echo {{ github.events.env.frontend }}
-      - if:   contains(env.frontend, 'SomeString')
-        run:  echo "SomeString did exist and should run"
+      - run: echo ${{ github.events.env.frontend }}
+      - if:   contains(env.frontend, 'siterx-referral-console')
+        run:  echo "siterx-referral-console is frontend"
   
