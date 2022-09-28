@@ -37,15 +37,23 @@ jobs:
       backend : '["siterx-webapp", "siterx-shorty-console"]'
       repo: devops
       branch: dev
-      InpRepoName: ${{ github.event.inputs.vmRepo }}
+      InpRepoName: format(${{ github.event.inputs.vmRepo }})
       
     name: Conditionally Run
     runs-on: ubuntu-latest
     steps:
-      - run: echo ${{ github.events.env.frontend }}
+      - name: Frontend check
       - run: echo ${{ github.event.inputs.vmRepo }} $InpRepoName
       - if:   contains(env.frontend, format(${{ github.event.inputs.vmRepo }}))
-        run:  echo "$InpRepoName is frontend"
-      - if: contains(env.backend, '$InpRepoName')
+        run:  echo format(${{ github.event.inputs.vmRepo }}) "is frontend"
+      - if:   contains(env.frontend, env.InpRepoName)
+        run:  echo $InpRepoName "is frontend"
+      - if:   contains(env.frontend, $InpRepoName)
+        run:  echo $InpRepoName "is frontend"
+        
+      - name: Backend check
+      - if: contains(env.backend, $InpRepoName)
         run: echo "$InpRepoName is a backend app"
-  
+        
+      - if:   contains(env.backend, env.InpRepoName)
+        run:  echo $InpRepoName "is backen"
