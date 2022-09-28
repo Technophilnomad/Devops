@@ -38,11 +38,14 @@ jobs:
       repo: devops
       branch: dev
       InpRepoName: format(${{ github.event.inputs.vmRepo }})
+      RepoName: 'siterx-referral-console'
       
     name: Conditionally Run
     runs-on: ubuntu-latest
     steps:
       #!
+      - if: contains(env.frontend, env.RepoName)
+        run: echo $RepoName is frontend
       - if:   contains(env.frontend, env.InpRepoName)
         run:  echo $InpRepoName "is frontend with env.InpRepoName"
         # working
