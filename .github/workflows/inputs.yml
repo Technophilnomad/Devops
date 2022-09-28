@@ -55,24 +55,9 @@ jobs:
       - if: contains(env.backend, env.BackendRepoName)
         run: echo $BackendRepoName is backend
         
-      - if:   contains(env.frontend, env.InpRepoName)
-        run:  echo $InpRepoName "is frontend with env.InpRepoName"
-        # working
-      - if:   contains(env.frontend, format(${{ github.event.inputs.vmRepo }}))
-        run:  echo ${{ github.event.inputs.vmRepo }} "is frontend"  
-      - if:   contains(env.frontend, '$InpRepoName')
-        run:  echo $InpRepoName "is frontend"
-      # will not work
-      #- if:   contains(env.frontend, $InpRepoName)
-      #  run:  echo $InpRepoName "is frontend"
+      - if: contains(env.frontend, env.InpRepoName)
+        run: echo $InpRepoName is frontend
+      - if: contains(env.backend, env.InpRepoName)
+        run: echo $InpRepoName is backend
       
-        
-        
-      - if: contains(env.backend, '$InpRepoName')
-        run: echo "$InpRepoName is a backend app"
-        
-      - if:   contains(env.backend, env.InpRepoName)
-        run:  echo $InpRepoName "is backen"
-        
-      - if:   contains(env.backend, format(${{ github.event.inputs.vmRepo }}))
-        run:  echo ${{ github.event.inputs.vmRepo }} "is backend"
+      
