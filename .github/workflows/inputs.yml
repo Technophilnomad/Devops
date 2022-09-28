@@ -33,13 +33,15 @@ on:
 jobs:
   setup:
     env: 
+      frontend : '["siterx-referral-console","siterx-annotator","siterx-trial-site-console"]'
+      backend : '["siterx-webapp", "siterx-shorty-console"]'
       repo: devops
       branch: dev
-    name: setup the environment
+      
+    name: Conditionally Run
     runs-on: ubuntu-latest
     steps:
-      - run: echo "helllo $repo  $branch ${{ github.event.inputs.vmRepo }}"
-      - name: checkout ${{ github.repository }}
-        uses: actions/checkout@v3
-        with:
-          repository: technophilnomad/devops
+      - run: echo {{ github.events.env.frontend }}
+      - if:   contains(env.frontend, 'SomeString')
+        run:  echo "SomeString did exist and should run"
+  
