@@ -43,9 +43,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo ${{ github.events.env.frontend }}
-      - run: echo ${{ github.event.inputs.vmRepo }}
+      - run: echo ${{ github.event.inputs.vmRepo }} $InpRepoName
       - if:   contains(env.frontend, format(${{ github.event.inputs.vmRepo }}))
-        run:  echo env.InpRepoName is frontend
-      - if: contains(env.backend, env.InpRepoName)
-        run: echo env.InpRepoName is a backend app
+        run:  echo $InpRepoName is frontend
+      - if: contains(env.backend, $InpRepoName)
+        run: echo $InpRepoName is a backend app
   
