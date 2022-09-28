@@ -50,8 +50,9 @@ jobs:
         run:  echo ${{ github.event.inputs.vmRepo }} "is frontend"  
       - if:   contains(env.frontend, '$InpRepoName')
         run:  echo $InpRepoName "is frontend"
-      - if:   contains(env.frontend, $InpRepoName)
-        run:  echo $InpRepoName "is frontend"
+      # will not work
+      #- if:   contains(env.frontend, $InpRepoName)
+      #  run:  echo $InpRepoName "is frontend"
       
         
         
