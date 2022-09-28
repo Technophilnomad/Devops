@@ -25,9 +25,11 @@ on:
       Action:
         description: Choose an action to perform
         type: Choice
+        default: Build
         options:
          - Build
          - Deploy
+         - Delete
 jobs:
   setup:
     env: 
