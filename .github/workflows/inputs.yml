@@ -46,6 +46,6 @@ jobs:
       - run: echo ${{ github.event.inputs.vmRepo }} $InpRepoName
       - if:   contains(env.frontend, format(${{ github.event.inputs.vmRepo }}))
         run:  echo "$InpRepoName is frontend"
-      - if: contains(env.backend, $InpRepoName)
+      - if: contains(env.backend, '$InpRepoName')
         run: echo "$InpRepoName is a backend app"
   
