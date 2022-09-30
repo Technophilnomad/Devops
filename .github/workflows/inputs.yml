@@ -45,13 +45,16 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       output1: ${{ steps.step1.outputs.test }}
+      output2: ${{ steps.step2.outputs.test }}
     steps:
       #!
       - if: contains(env.frontend, env.FrontendRepoName)
+        id: step1
         run: |
           echo $FrontendRepoName is frontend $InpRepoName
           echo "::set-output name=test::hello"
       - if: contains(env.backend, env.FrontendRepoName)
+        id: step2
         run: |
           echo $FrontendRepoName is frontend $InpRepoName
           echo "::set-output name=test::world"
