@@ -65,4 +65,6 @@ jobs:
     needs: [ setup ]
     steps:
       - name: checking the output
-        run: echo ${{needs.setup.outputs.output1}}
+        run: |
+          echo ${{needs.setup.outputs.output1}}
+          echo ${{needs.setup.outputs.output2}}
