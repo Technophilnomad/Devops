@@ -56,4 +56,10 @@ jobs:
           echo $FrontendRepoName is frontend $InpRepoName
           echo "::set-output name=test::world"
       
-      
+  check:
+    name: output check
+    runs-on: ubuntu-latest
+    needs: [ setup ]
+    steps:
+      - name: checking the output
+        run: echo ${{needs.job1.outputs.output1}}
