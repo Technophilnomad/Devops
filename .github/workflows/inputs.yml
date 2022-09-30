@@ -37,7 +37,7 @@ jobs:
       backend : '["siterx-webapp", "siterx-shorty-backend"]'
       repo: devops
       branch: dev
-      InpRepoName: ${{ github.event.inputs.vmRepo }}
+      vmRepo: ${{ github.event.inputs.vmRepo }}
       FrontendRepoName: 'siterx-annotator'
       BackendRepoName: 'siterx-shorty-backend'
       
@@ -48,15 +48,15 @@ jobs:
       output2: ${{ steps.step2.outputs.test }}
     steps:
       #!
-      - if: contains(env.frontend, env.FrontendRepoName)
+      - if: contains(env.frontend, env.vmRepo)
         id: step1
         run: |
           echo $FrontendRepoName is frontend $InpRepoName
           echo "::set-output name=test::hello"
-      - if: contains(env.backend, env.FrontendRepoName)
+      - if: contains(env.backend, env.vmRepo)
         id: step2
         run: |
-          echo $FrontendRepoName is frontend $InpRepoName
+          echo $FrontendRepoName is Backend $InpRepoName
           echo "::set-output name=test::world"
       
   check:
