@@ -52,12 +52,12 @@ jobs:
         id: step1
         run: |
           echo $FrontendRepoName is frontend $InpRepoName
-          echo "::set-output name=test::hello"
+          echo "::set-output name=test::frontend"
       - if: contains(env.backend, env.vmRepo)
         id: step2
         run: |
           echo $FrontendRepoName is Backend $InpRepoName
-          echo "::set-output name=test::world"
+          echo "::set-output name=test::backend"
       
   check:
     name: output check
@@ -68,3 +68,14 @@ jobs:
         run: |
           echo ${{needs.setup.outputs.output1}}
           echo ${{needs.setup.outputs.output2}}
+  Backend:
+    if: ${{ ( needs.setup.outputs.output1 == 'frontend' ) }}
+    name: Backend Job
+    runs-on: ubuntu-latest
+    needs: [ setup ]
+  
+  Frontend:
+    if: ${{ ( needs.setup.outputs.output1 == 'backend' ) }}
+    name: Frontend Job
+    runs-on: ubuntu-latest
+    needs: [ setup ]
