@@ -73,9 +73,15 @@ jobs:
     name: Backend Job
     runs-on: ubuntu-latest
     needs: [ setup ]
+    steps:
+       - run: |
+            echo running Frontend jobs 
   
   Frontend:
     if: ${{ ( needs.setup.outputs.output1 == 'backend' ) }}
     name: Frontend Job
     runs-on: ubuntu-latest
     needs: [ setup ]
+    steps:
+       - run: |
+            echo Runing Backend jobs   
