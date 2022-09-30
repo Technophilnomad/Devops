@@ -43,22 +43,17 @@ jobs:
       
     name: Conditionally Run
     runs-on: ubuntu-latest
+    outputs:
+      output1: ${{ steps.step1.outputs.test }}
     steps:
       #!
       - if: contains(env.frontend, env.FrontendRepoName)
-        run: echo $FrontendRepoName is frontend $InpRepoName
+        run: |
+          echo $FrontendRepoName is frontend $InpRepoName
+          echo "::set-output name=test::hello"
       - if: contains(env.backend, env.FrontendRepoName)
-        run: echo $FrontendRepoName is backend $InpRepoName
-        
-      - if: contains(env.frontend, env.BackendRepoName)
-        run: echo $BackendRepoName is frontend $InpRepoName
-      - if: contains(env.backend, env.BackendRepoName)
-        run: echo $BackendRepoName is backend
-        
-      - if: contains(env.frontend, env.InpRepoName)
-        run: echo $InpRepoName is frontend
-      - if: contains(env.backend, env.InpRepoName)
-        run: echo $InpRepoName is backend
-      
+        run: |
+          echo $FrontendRepoName is frontend $InpRepoName
+          echo "::set-output name=test::world"
       
       
