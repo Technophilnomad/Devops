@@ -38,8 +38,6 @@ jobs:
       repo: devops
       branch: dev
       vmRepo: ${{ github.event.inputs.vmRepo }}
-      FrontendRepoName: 'siterx-annotator'
-      BackendRepoName: 'siterx-shorty-backend'
       
     name: Conditionally Run
     runs-on: ubuntu-latest
@@ -51,12 +49,12 @@ jobs:
       - if: contains(env.frontend, env.vmRepo)
         id: step1
         run: |
-          echo $FrontendRepoName is frontend $InpRepoName
+          echo $vmRepo is frontend
           echo "::set-output name=test::frontend"
       - if: contains(env.backend, env.vmRepo)
         id: step2
         run: |
-          echo $FrontendRepoName is Backend $InpRepoName
+          echo $vmRepo is Backend
           echo "::set-output name=test::backend"
       
   check:
@@ -68,6 +66,8 @@ jobs:
         run: |
           echo ${{needs.setup.outputs.output1}}
           echo ${{needs.setup.outputs.output2}}
+          
+          
   Backend:
     if: ${{ ( needs.setup.outputs.output2 == 'backend' ) }}
     name: Backend Job
