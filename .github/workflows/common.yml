@@ -3,6 +3,8 @@ on:
     branches:
       - dev/dev-shrek
       - dev/dev-vikings
+env:
+  teams: '["shrek", "vikings"]'
       
 jobs:
    backup:
@@ -12,4 +14,7 @@ jobs:
       - name: branch name is ${{ github.ref_name  }} 
         run:  |
           echo Hello from common workflow
+          echo $teams[0]
+          echo env.teams[0]
+          echo ${{ env.teams[0] }}
   
