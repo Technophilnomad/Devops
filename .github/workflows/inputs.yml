@@ -63,7 +63,7 @@ jobs:
         ls
         cd /home/runner/work/${{ github.event.repository.name }}/${{ github.event.repository.name }}/${{ github.event.inputs.vmRepo }}
         git status
-        git checkout 457d7f1
+        git checkout ${{ github.event.inputs.CommitID }}
         
 
   setup:
