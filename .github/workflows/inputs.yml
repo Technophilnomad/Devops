@@ -54,11 +54,11 @@ jobs:
          repository: ${{ github.repository }}
          token: ${{ secrets.GITHUB_TOKEN }}
          ref: dev/${{ github.event.inputs.vmEnv }}
-         path: secrets
+         path: ${{ github.event.inputs.vmEnv }}
     - run: |
         pwd
         ls
-        #cd /home/runner/work/${{ github.event.repository.name }}/${{ github.event.inputs.vmRepo }}
+        cd /home/runner/work/${{ github.event.repository.name }}/${{ github.event.repository.name }}/${{ github.event.inputs.vmRepo }}
         git status
         
 
