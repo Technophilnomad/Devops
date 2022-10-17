@@ -59,7 +59,8 @@ jobs:
          token: ${{ secrets.GITHUB_TOKEN }}
          ref: dev/${{ github.event.inputs.vmEnv }}
          path: ${{ github.event.inputs.vmRepo }}
-    - run: |
+    - if: github.event.inputs.CommitID != null
+      run: |
         pwd
         ls
         cd /home/runner/work/${{ github.event.repository.name }}/${{ github.event.repository.name }}/${{ github.event.inputs.vmRepo }}
