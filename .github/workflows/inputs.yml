@@ -55,6 +55,7 @@ jobs:
          token: ${{ secrets.GITHUB_TOKEN }}
          ref: dev/${{ github.event.inputs.vmEnv }}
          path: secrets
+    - run: git status
 
   setup:
     env: 
