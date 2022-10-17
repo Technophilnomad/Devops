@@ -44,6 +44,7 @@ on:
          - dev-wolfpack
       CommitID:
         description: Select the commit id to checkout.
+        default: GITHUB_SHA
 
 jobs:
 
