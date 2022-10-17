@@ -8,6 +8,7 @@ on:
         type: choice
         options:
          - FRONTEND
+         - Devops
          - siterx-referral-console
          - siterx-annotator
          - siterx-trial-site-console
