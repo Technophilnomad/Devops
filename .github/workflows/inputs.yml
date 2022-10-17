@@ -42,6 +42,8 @@ on:
          - dev-ninjas
          - dev-farquaad
          - dev-wolfpack
+      CommitID:
+        description: Select the commit id to checkout.
 
 jobs:
 
