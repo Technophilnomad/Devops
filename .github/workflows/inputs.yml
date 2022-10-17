@@ -54,7 +54,7 @@ jobs:
          repository: ${{ github.repository }}
          token: ${{ secrets.GITHUB_TOKEN }}
          ref: dev/${{ github.event.inputs.vmEnv }}
-         path: ${{ github.event.inputs.vmEnv }}
+         path: ${{ github.event.inputs.vmRepo }}
     - run: |
         pwd
         ls
