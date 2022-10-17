@@ -57,6 +57,7 @@ jobs:
          path: secrets
     - run: |
         pwd
+        cd /home/runner/work/${{ github.event.repository.name }}/${{ github.event.repository.name }}/${{ github.event.inputs.vmRepo }}
         git status
         
 
