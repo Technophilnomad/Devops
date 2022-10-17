@@ -31,6 +31,18 @@ on:
          - Deploy
          - Delete
 jobs:
+
+  secrets:
+    name: Check out secrets repo
+    runs-on: ubuntu-latest
+    steps:
+    - uses:  actions/checkout@v3
+      with:
+         repository: ${{ github.repository }}
+         token: ${{ secrets.GITHUB_TOKEN }}
+         ref: dev/${{ github.event.inputs.vmEnv }}
+         path: secrets
+
   setup:
     env: 
       frontend : '["siterx-referral-console","siterx-annotator","siterx-trial-site-console"]'
