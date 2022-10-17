@@ -30,6 +30,18 @@ on:
          - Build
          - Deploy
          - Delete
+
+      vmEnv:
+        description: Choose destination Environment.
+        type: choice
+        options:
+         - dev-shrek
+         - dev-vikings
+         - dev-geeks
+         - dev-ninjas
+         - dev-farquaad
+         - dev-wolfpack
+
 jobs:
 
   secrets:
