@@ -61,6 +61,7 @@ jobs:
     - if: github.event.inputs.CommitID != null
       run: |
         echo $GITHUB_ENV
+        env
         pwd
         ls
         cd /home/runner/work/${{ github.event.repository.name }}/${{ github.event.repository.name }}/${{ github.event.inputs.vmRepo }}
