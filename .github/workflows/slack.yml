@@ -7,4 +7,7 @@ jobs:
   Notify:
     name: Sending Notification to Slack
     runs-on: ubuntu-latest 
-    run : curl -X POST -H 'Content-type: application/json' --data '{"text":"Hello, World!"}' https://hooks.slack.com/services/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
+    steps:
+      - name: checking the output    
+        run: |
+            curl -X POST -H 'Content-type: application/json' --data '{"text":"Hello, World!"}' https://hooks.slack.com/services/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
