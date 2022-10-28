@@ -11,6 +11,6 @@ jobs:
       - name: Slack Notification
         uses: rtCamp/action-slack-notify@v2
         env:
-          SLACK_CHANNEL: devops
+          SLACK_CHANNEL: C047XS83PU1
           SLACK_WEBHOOK: https://hooks.slack.com/services/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
           SLACK_MESSAGE: Heloo world
