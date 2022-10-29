@@ -28,3 +28,18 @@ jobs:
 
       - name: Result from "Send Slack Message"
         run: echo '${{ steps.send-message.outputs.slack-result }}'
+        
+      - name: Setup Emoji
+        run: echo 'sending emoji'
+
+      - name: Send Slack Reaction To Message
+        uses: archive/github-actions-slack@master
+        with:
+          slack-function: send-reaction
+          slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_TOKEN }}
+          slack-channel: ${{ fromJson(steps.send-message.outputs.slack-result).response.channel }}
+          slack-emoji-name: tada
+          slack-message-timestamp: ${{ fromJson(steps.send-message.outputs.slack-result).response.message.ts }}
+
+      - name: Send Slack Reaction To Message Result
+        run: echo 'Data - ${{ steps.send-message.outputs.slack-result }}'
