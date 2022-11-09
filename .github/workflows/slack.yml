@@ -1,0 +1,45 @@
+name: Automatic Notify to Slack
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  
+jobs:
+  Notify:
+    name: Sending Notification to Slack
+    runs-on: ubuntu-latest 
+    steps:
+      #- name: Notify slack
+      # env:
+      #    SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      #  uses: pullreminders/slack-action@master
+      #  with:
+      #   args: '{\"channel\":\"C047XS83PU1\",\"text\":\"Hello world\"}'
+      
+      - name: Send Slack Message
+        uses: archive/github-actions-slack@master
+        id: send-message
+        with:
+          slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_TOKEN }}
+          slack-channel: C047XS83PU1
+          slack-text: Test 2 - 🤓 Event name "${{ github.event_name }}" Repo "${{ github.repository }}"
+
+      - name: Result from "Send Slack Message"
+        run: echo '${{ steps.send-message.outputs.slack-result }}'
+        
+      - name: Setup Emoji
+        run: echo 'sending emoji'
+
+      - name: Send Slack Reaction To Message
+        uses: archive/github-actions-slack@master
+        with:
+          slack-function: send-reaction
+          slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_TOKEN }}
+          slack-channel: ${{ fromJson(steps.send-message.outputs.slack-result).response.channel }}
+          slack-emoji-name: tada
+          slack-message-timestamp: ${{ fromJson(steps.send-message.outputs.slack-result).response.message.ts }}
+
+      - name: Send Slack Reaction To Message Result
+        run: echo 'Data - ${{ steps.send-message.outputs.slack-result }}'

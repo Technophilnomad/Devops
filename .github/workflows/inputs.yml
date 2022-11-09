@@ -8,6 +8,7 @@ on:
         type: choice
         options:
          - FRONTEND
+         - Devops
          - siterx-referral-console
          - siterx-annotator
          - siterx-trial-site-console
@@ -30,7 +31,44 @@ on:
          - Build
          - Deploy
          - Delete
+
+      vmEnv:
+        description: Choose destination Environment.
+        type: choice
+        options:
+         - dev-shrek
+         - dev-vikings
+         - dev-geeks
+         - dev-ninjas
+         - dev-farquaad
+         - dev-wolfpack
+      CommitID:
+        description: Select the commit id to checkout.
+
 jobs:
+
+  secrets:
+    name: Check out secrets repo
+    runs-on: ubuntu-latest
+    steps:
+    - uses:  actions/checkout@v3
+      with:
+         repository: ${{ github.repository }}
+         fetch-depth: 0
+         token: ${{ secrets.GITHUB_TOKEN }}
+         ref: dev/${{ github.event.inputs.vmEnv }}
+         path: ${{ github.event.inputs.vmRepo }}
+    - if: github.event.inputs.CommitID != null
+      run: |
+        echo $GITHUB_ENV
+        env
+        pwd
+        ls
+        cd /home/runner/work/${{ github.event.repository.name }}/${{ github.event.repository.name }}/${{ github.event.inputs.vmRepo }}
+        git status
+        git checkout ${{ github.event.inputs.CommitID }}
+        
+
   setup:
     env: 
       frontend : '["siterx-referral-console","siterx-annotator","siterx-trial-site-console"]'
