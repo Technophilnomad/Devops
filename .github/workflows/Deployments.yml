@@ -14,11 +14,11 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Compile
-        run: echo Hello, world! github ref is $GITHUB_REF and event ref ${{ github.event.ref }}
+        run: echo Hello, world! github ref is $GITHUB_REF and event ref ${{ github.ref }} and ${{ github.base_ref}} end
     
   DeployDev:
     name: Deploy to Dev 
-    if: github.event_name == 'pull_request' && github.event.ref == 'refs/heads/dev/dev-GDT1013'
+    if: github.event_name == 'pull_request' && ${{ github.base_ref}} == 'refs/heads/dev/dev-GDT1013'
     needs: [Build]
     runs-on: ubuntu-latest
     environment: 
