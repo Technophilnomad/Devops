@@ -22,17 +22,28 @@ jobs:
       - name: Compile
         run: echo Hello, world! github ref is $GITHUB_REF and event ref ${{ github.ref }} and ${{ github.base_ref}} end
     
-  DeployDev:
+  DeployDev1014:
     name: Deploy to Dev 
     if: github.event_name == 'pull_request' && github.head_ref == 'dev/dev-GDT1014'
     needs: [Build]
     runs-on: ubuntu-latest
     environment: 
       name: Development
-      url: 'http://dev.myapp.com'
+      url: 'http://dev1014.myapp.com'
     steps:
       - name: Deploy
         run: echo I am deploying! 
+  DeployDev1015:
+    name: Deploy to Dev 1015 
+    if: github.event_name == 'pull_request' && github.head_ref == 'dev/dev-GDT1015'
+    needs: [Build]
+    runs-on: ubuntu-latest
+    environment: 
+      name: Development
+      url: 'http://dev1015.myapp.com'
+    steps:
+      - name: Deploy
+        run: echo I am deploying to 1015
     
   DeployStaging:
     name: Deploy to Staging 
