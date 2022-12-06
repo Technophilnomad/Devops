@@ -18,7 +18,7 @@ jobs:
     
   DeployDev:
     name: Deploy to Dev 
-    if: github.event_name == 'pull_request'
+    if: github.event_name == 'pull_request' && github.event.ref == 'refs/dev/dev-GDT1013'
     needs: [Build]
     runs-on: ubuntu-latest
     environment: 
