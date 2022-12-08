@@ -35,7 +35,9 @@ jobs:
       url: '$NODE_ENV'
     steps:
       - name: Deploy
-        run: echo I am deploying! $NODE_ENV 
+        run: | 
+          echo I am deploying! $NODE_ENV > ~/test.txt
+          cat test.txt
     
   DeployStaging:
     name: Deploy to Staging 
