@@ -28,7 +28,7 @@ jobs:
     needs: [Build]
     runs-on: ubuntu-latest
     environment: 
-      name: Development
+      name: ${{ github.head_ref }}
       url: 'http://dev1014.myapp.com'
     steps:
       - name: Deploy
