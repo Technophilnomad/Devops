@@ -7,6 +7,9 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
+env:
+  NODE_ENV: ${{ secrets.NODE_ENV }}
+
 jobs:
   dump_contexts_to_log:
     runs-on: ubuntu-latest
@@ -22,9 +25,9 @@ jobs:
       - name: Compile
         run: echo Hello, world! github ref is $GITHUB_REF and event ref ${{ github.ref }} and ${{ github.base_ref}} end
     
-  DeployDev1014:
-    name: Deploy to Dev 
-    if: github.event_name == 'pull_request' && github.head_ref == 'dev/dev-GDT1014' || github.head_ref == 'dev/dev-GDT1017'
+  DeployDev:
+    name: Deploy to Dev ${{ gitub.head_ref }}
+    if: github.event_name == 'pull_request' && github.head_ref == 'dev/dev-GDT1014' || github.head_ref == 'dev/dev-GDT1017' || github.head_ref == 'dev/dev-GDT1018' 
     needs: [Build]
     runs-on: ubuntu-latest
     environment: 
@@ -32,18 +35,7 @@ jobs:
       url: 'http://dev1014.myapp.com'
     steps:
       - name: Deploy
-        run: echo I am deploying! 
-  DeployDev1015:
-    name: Deploy to Dev 1015 
-    if: github.event_name == 'pull_request' && github.head_ref == 'dev/dev-GDT1015'
-    needs: [Build]
-    runs-on: ubuntu-latest
-    environment: 
-      name: Development
-      url: 'http://dev1015.myapp.com'
-    steps:
-      - name: Deploy
-        run: echo I am deploying to 1015
+        run: echo I am deploying! $NODE_ENV 
     
   DeployStaging:
     name: Deploy to Staging 
