@@ -27,7 +27,7 @@ jobs:
     
   DeployDev:
     name: Deploy to Dev ${{ gitub.head_ref }}
-    if: github.event_name == 'pull_request' && github.head_ref == 'dev/dev-GDT1014' || github.head_ref == 'dev/dev-GDT1017' || github.head_ref == 'dev/dev-GDT1018' 
+    if: github.event_name == 'pull_request' && github.head_ref == 'dev/dev-GDT1014' || github.head_ref == 'dev/dev-GDT1018' 
     needs: [Build]
     runs-on: ubuntu-latest
     environment: 
