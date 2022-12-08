@@ -26,16 +26,18 @@ jobs:
         run: echo Hello, world! github ref is $GITHUB_REF and event ref ${{ github.ref }} and ${{ github.base_ref}} end
     
   DeployDev:
-    name: Deploy to Dev ${{ gitub.head_ref }}
-    if: github.event_name == 'pull_request' && github.head_ref == 'dev/dev-GDT1014' || github.head_ref == 'dev/dev-GDT1017' || github.head_ref == 'dev/dev-GDT1018' 
+    name: Deploy to Dev ${{ github.head_ref }}
+    if: github.event_name == 'pull_request' && github.head_ref == 'dev/dev-GDT1014' || github.head_ref == 'dev/dev-GDT1018' || github.head_ref == 'dev/dev-GDT1017' 
     needs: [Build]
     runs-on: ubuntu-latest
     environment: 
       name: ${{ github.head_ref }}
-      url: 'http://dev1014.myapp.com'
+      url: '$NODE_ENV'
     steps:
       - name: Deploy
-        run: echo I am deploying! $NODE_ENV 
+        run: | 
+          echo I am deploying! "$NODE_ENV" > test.txt
+          cat test.txt
     
   DeployStaging:
     name: Deploy to Staging 
