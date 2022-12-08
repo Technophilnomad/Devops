@@ -32,7 +32,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: 
       name: ${{ github.head_ref }}
-      url: $NODE_ENV
+      url: ${{ $NODE_ENV }}
     steps:
       - name: Deploy
         run: echo I am deploying! $NODE_ENV 
