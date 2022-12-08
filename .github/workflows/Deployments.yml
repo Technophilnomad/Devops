@@ -34,7 +34,9 @@ jobs:
       url: 'http://dev1016.myapp.com'
     steps:
       - name: Deploy
-        run: echo to $NODE_ENV 
+        run: | 
+          echo to $NODE_ENV 
+          env
   DeployDev1015:
     name: Deploy to Dev 1015 
     if: github.event_name == 'pull_request' && github.head_ref == 'dev/dev-GDT1015'
