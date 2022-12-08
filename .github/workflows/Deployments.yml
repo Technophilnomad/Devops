@@ -35,7 +35,8 @@ jobs:
     steps:
       - name: Deploy
         run: | 
-          echo to $NODE_ENV 
+          export NOD_ENV=$NODE_ENV
+          echo $NOD_ENV
           env
   DeployDev1015:
     name: Deploy to Dev 1015 
