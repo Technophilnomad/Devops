@@ -24,12 +24,12 @@ jobs:
     
   DeployDev1014:
     name: Deploy to Dev 
-    if: github.event_name == 'pull_request' && github.head_ref == 'dev/dev-GDT1014'
+    if: github.event_name == 'pull_request' && github.head_ref == 'dev/dev-GDT1016'
     needs: [Build]
     runs-on: ubuntu-latest
     environment: 
-      name: Development
-      url: 'http://dev1014.myapp.com'
+      name: github.head_ref
+      url: 'http://dev1016.myapp.com'
     steps:
       - name: Deploy
         run: echo I am deploying! 
