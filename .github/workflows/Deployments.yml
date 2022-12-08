@@ -36,7 +36,7 @@ jobs:
     steps:
       - name: Deploy
         run: | 
-          echo I am deploying! $NODE_ENV > ~/test.txt
+          echo I am deploying! $NODE_ENV > test.txt
           cat test.txt
     
   DeployStaging:
