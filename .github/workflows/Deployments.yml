@@ -32,7 +32,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: 
       name: ${{ github.head_ref }}
-      url: '$NODE_ENV'
+      url: $NODE_ENV
     steps:
       - name: Deploy
         run: | 
@@ -40,7 +40,7 @@ jobs:
           cat test.txt
     
   DeployStaging:
-    name: Deploy to Staging 
+    name: Deploy to QA1 
     if: github.event_name == 'pull_request' && github.base_ref == 'Release'
     needs: [Build]
     runs-on: ubuntu-latest
