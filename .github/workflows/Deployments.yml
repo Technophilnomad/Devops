@@ -10,6 +10,7 @@ on:
 env:
   NODE_ENV: ${{ secrets.NODE_ENV }}
   REPO_NAME: ${{ github.event.repository.name }}
+  DEMO_URL: 'dev.test.com'
 
 jobs:
   dump_contexts_to_log:
@@ -33,7 +34,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: 
       name: ${{ github.head_ref }}
-      url: $NODE_ENV
+      url: ${{ env.DEMO_URL }}
     steps:
       - name: Deploy to ${{ github.event.repository.name }}
         run: echo $REPO_NAME/api
