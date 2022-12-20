@@ -36,10 +36,7 @@ jobs:
       url: $NODE_ENV
     steps:
       - name: Deploy to ${{ github.event.repository.name }}
-        run: | 
-          echo I am deploying! $GITHUB_REPOSITORY
-          cat test.txt
-          echo $REPO_NAME
+        run: echo $REPO_NAME
           
     
   DeployStaging:
