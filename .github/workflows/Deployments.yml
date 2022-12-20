@@ -34,10 +34,12 @@ jobs:
       name: ${{ github.head_ref }}
       url: $NODE_ENV
     steps:
-      - name: Deploy
+      - name: Deploy to ${{ github.event.repository.name }}
         run: | 
-          echo I am deploying! "$NODE_ENV" > test.txt
+          echo I am deploying! $GITHUB_REPOSITORY
           cat test.txt
+          echo ::set-env name=REPO_NAME::${GITHUB_REPOSITORY#*/}
+          
     
   DeployStaging:
     name: Deploy to QA1 
