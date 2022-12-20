@@ -9,6 +9,7 @@ on:
 
 env:
   NODE_ENV: ${{ secrets.NODE_ENV }}
+  REPO_NAME: ${{ github.event.repository.name }}
 
 jobs:
   dump_contexts_to_log:
@@ -39,6 +40,7 @@ jobs:
           echo I am deploying! $GITHUB_REPOSITORY
           cat test.txt
           echo ::set-env name=REPO_NAME::${GITHUB_REPOSITORY#*/}
+          echo "$REPO_NAME"
           
     
   DeployStaging:
