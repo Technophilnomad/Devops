@@ -39,7 +39,7 @@ jobs:
         run: | 
           echo I am deploying! $GITHUB_REPOSITORY
           cat test.txt
-          echo ::set-env name=REPO_NAME::${GITHUB_REPOSITORY#*/}
+          #echo ::set-env name=REPO_NAME::${GITHUB_REPOSITORY#*/}
           echo "$REPO_NAME"
           
     
