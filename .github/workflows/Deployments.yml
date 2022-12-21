@@ -47,7 +47,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: 
       name: qa1
-      url: $DEMO_URL
+      url: ${{ env.DEMO_URL }}
     steps:
       - name: Deploy
         run: echo I am deploying! 
