@@ -48,7 +48,7 @@ jobs:
       - name: Deploy to ${{ github.event.repository.name }}
         run: |
           echo $REPO_NAME/api
-          echo $DEV_URL
+          echo "DEV_URL=$DEV_URL" >> $GITHUB_ENV
           
     
   DeployStaging:
