@@ -44,7 +44,9 @@ jobs:
       url: '${{ env.DEV_URL }}'
     steps:
       - name: Deploy to ${{ github.event.repository.name }}
-        run: echo $REPO_NAME/api
+        run: |
+          echo $REPO_NAME/api
+          echo $DEV_URL
           
     
   DeployStaging:
