@@ -24,7 +24,7 @@ jobs:
       - name: Set output variables
         if: github.head_ref == 'dev/dev-arizona'
         run: |
-          echo "DEV_URL='http://www.example.com'" >> $GITHUB_ENV
+          echo "DEV_URL=http://www.example.com" >> $GITHUB_ENV
           
   dump_contexts_to_log:
     needs: [Build]
