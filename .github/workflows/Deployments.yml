@@ -31,7 +31,7 @@ jobs:
         run: |
           echo $DEV_URL
           echo "DEV_URL=$DEV_URL" >> $GITHUB_ENV
-          echo $MY_ENV_VAR
+          echo ${{ env.MY_ENV_VAR }}
           
           
   dump_contexts_to_log:
@@ -54,7 +54,7 @@ jobs:
         run: |
           echo $REPO_NAME/api
           echo $DEV_URL
-          echo $MY_ENV_VAR
+          echo ${{ env.MY_ENV_VAR }}
           
           
     
