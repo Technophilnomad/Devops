@@ -48,7 +48,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: 
       name: ${{ github.head_ref }}
-      url: '${{ env.DEMO_URL }}'
+      url: '${{ env.MY_ENV_VAR }}'
     steps:
       - name: Deploy to ${{ github.event.repository.name }}
         run: |
