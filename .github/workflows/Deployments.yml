@@ -20,16 +20,15 @@ jobs:
 
       - name: Compile
         run: echo Hello, world! github ref is $GITHUB_REF and event ref ${{ github.ref }} and ${{ github.base_ref}} end
-      - name: set environment variables
-        uses: allenevans/set-env@v2.0.0
-        with:
-          MY_ENV_VAR: 'my value'
+        
       - name: Set env variables
+        id: buildnumber
         if: github.head_ref == 'dev/dev-arizona'
         env: 
           DEV_URL : https://dev1.test.com
         run: |
           DEV_URL=$DEV_URL
+          echo "::set-output name=TEST_URL::https://test.test.com"
           echo $DEV_URL
           echo "DEV_URL=${DEV_URL}" >> $GITHUB_ENV
           echo ${{ env.MY_ENV_VAR }}
@@ -56,6 +55,7 @@ jobs:
           echo $REPO_NAME/api
           echo $DEV_URL
           echo ${{ env.MY_ENV_VAR }}
+          echo "${{ steps.buildnumber.outputs.TEST_URL }}"
           
           
     
