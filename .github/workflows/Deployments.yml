@@ -44,7 +44,9 @@ jobs:
           echo ${{ env.DEV_URL }}
       
       - name: print common variable
-        run: echo ${{ env.DEV_URL }}
+        run: |
+          echo ${{ env.DEV_URL }}
+          echo $GITHUB_ENV
       
         
           
