@@ -9,14 +9,10 @@ on:
 
 env:
   NODE_ENV: ${{ secrets.NODE_ENV }}
+  REPO_NAME: ${{ github.event.repository.name }}
+  DEMO_URL: 'http://test.myapp.com'
 
 jobs:
-  dump_contexts_to_log:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Dump GitHub context
-        id: github_context_step
-        run: echo '${{ toJSON(github) }}'
   Build:
     runs-on: ubuntu-latest
     steps:
@@ -24,7 +20,27 @@ jobs:
 
       - name: Compile
         run: echo Hello, world! github ref is $GITHUB_REF and event ref ${{ github.ref }} and ${{ github.base_ref}} end
-    
+        
+      - name: Set env variables
+        id: buildnumber
+        if: github.head_ref == 'dev/dev-arizona'
+        env: 
+          DEV_URL : https://dev1.test.com
+        run: |
+          DEV_URL=$DEV_URL
+          echo "::set-output name=TEST_URL::$(date)"
+          echo $DEV_URL
+          echo "{DEV_URL}={https://www.example.com}" >> $GITHUB_ENV
+          echo ${{ env.MY_ENV_VAR }}
+          
+          
+  dump_contexts_to_log:
+    needs: [Build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump GitHub context
+        id: github_context_step
+        run: echo '${{ toJSON(github) }}'
   DeployDev:
     name: Deploy to Dev ${{ github.head_ref }}
     if: github.event_name == 'pull_request' && github.head_ref == 'dev/dev-arizona' || github.head_ref == 'dev/dev-banglore' || github.head_ref == 'dev/dev-california' 
@@ -32,21 +48,26 @@ jobs:
     runs-on: ubuntu-latest
     environment: 
       name: ${{ github.head_ref }}
-      url: '$NODE_ENV'
+      url: '${{ env.MY_ENV_VAR }}'
     steps:
-      - name: Deploy
-        run: | 
-          echo I am deploying! "$NODE_ENV" > test.txt
-          cat test.txt
+      - name: Deploy to ${{ github.event.repository.name }}
+        run: |
+          echo $REPO_NAME/api
+          echo $DEV_URL
+          echo ${{ env.MY_ENV_VAR }}
+          echo ${{ env.DEV_URL }}
+          echo "${{ steps.buildnumber.outputs.TEST_URL }}"
+          
+          
     
   DeployStaging:
-    name: Deploy to Staging 
-    if: github.event_name == 'pull_request' && github.base_ref == 'refs/heads/Release'
+    name: Deploy to QA1 
+    if: github.event_name == 'pull_request' && github.base_ref == 'Release'
     needs: [Build]
     runs-on: ubuntu-latest
     environment: 
-      name: Staging
-      url: 'http://test.myapp.com'
+      name: qa1
+      url: ${{ env.DEMO_URL }}
     steps:
       - name: Deploy
         run: echo I am deploying! 
