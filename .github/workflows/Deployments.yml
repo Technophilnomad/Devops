@@ -15,9 +15,11 @@ env:
 jobs:
   Build:
     runs-on: ubuntu-latest
+    outputs:
+      devEnv: ${{ steps.step1.outputs.test }}
     steps:
       - uses: actions/checkout@v2
-
+        id: step1
       - name: Compile
         run: echo Hello, world! github ref is $GITHUB_REF and event ref ${{ github.ref }} and ${{ github.base_ref}} end
         
@@ -32,6 +34,7 @@ jobs:
           elif [ "${{ github.head_ref }}" == "refs/heads/dev/dev-banglore" ]; then
             echo "::set-env name=MY_VARIABLE::dev2.example.com"
           fi
+          echo "::set-output name=test::hello"
           echo ${{ env.MY_VARIABLE }}
           echo '${{ env.MY_VARIABLE }}'
           echo ${{ env.DEV_URL }}
@@ -42,12 +45,13 @@ jobs:
           DEV_URL : https://dev2.test.com
         run: |
           echo ${{ env.DEV_URL }}
+          echo "::set-output name=test::world"
       
       - name: print common variable
         run: |
           echo ${{ env.DEV_URL }}
           echo $GITHUB_ENV
-          cat $GITHUB_ENV
+          echo ${{ needs.build.outputs.devEnv }}
       
         
           
