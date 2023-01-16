@@ -34,6 +34,7 @@ jobs:
           fi
           echo ${{ env.MY_VARIABLE }}
           echo '${{ env.MY_VARIABLE }}'
+          echo ${{ env.DEV_URL }}
           
           
   dump_contexts_to_log:
