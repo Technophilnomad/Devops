@@ -31,8 +31,8 @@ jobs:
             echo "::set-env name=MY_VARIABLE::dev1.example.com"
           elif [ "${{ github.head_ref }}" == "refs/heads/dev/dev-banglore" ]; then
             echo "::set-env name=MY_VARIABLE::dev2.example.com"
+          fi
           echo {{ env.MY_VARIABLE }}
-            fi
           
           
   dump_contexts_to_log:
