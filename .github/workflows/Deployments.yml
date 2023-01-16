@@ -27,11 +27,11 @@ jobs:
         env: 
           DEV_URL : https://dev1.test.com
         run: |
-          DEV_URL=$DEV_URL
-          echo "::set-output name=TEST_URL::$(date)"
-          echo $DEV_URL
-          echo "{DEV_URL}={https://www.example.com}" >> $GITHUB_ENV
-          echo ${{ env.MY_ENV_VAR }}
+          if [ "${{ github.head_ref }}" == "refs/heads/dev/dev-arizona" ]; then
+            echo "::set-env name=MY_VARIABLE::dev1.example.com"
+          elif [ "${{ github.head_ref }}" == "refs/heads/dev/dev-banglore" ]; then
+            echo "::set-env name=MY_VARIABLE::dev2.example.com"
+            fi
           
           
   dump_contexts_to_log:
@@ -42,7 +42,7 @@ jobs:
         id: github_context_step
         run: echo '${{ toJSON(github) }}'
   DeployDev:
-    name: Deploy to Dev ${{ github.head_ref }}
+    name: Deploy to Dev ${{ env.MY_VARIABLE }}
     if: github.event_name == 'pull_request' && github.head_ref == 'dev/dev-arizona' || github.head_ref == 'dev/dev-banglore' || github.head_ref == 'dev/dev-california' 
     needs: [Build]
     runs-on: ubuntu-latest
