@@ -47,6 +47,7 @@ jobs:
         run: |
           echo ${{ env.DEV_URL }}
           echo $GITHUB_ENV
+          cat $GITHUB_ENV
       
         
           
