@@ -42,7 +42,7 @@ jobs:
         id: github_context_step
         run: echo '${{ toJSON(github) }}'
   DeployDev:
-    name: Deploy to Dev '${{ env.MY_VARIABLE }}'
+    name: Deploy to Dev
     if: github.event_name == 'pull_request' && github.head_ref == 'dev/dev-arizona' || github.head_ref == 'dev/dev-banglore' || github.head_ref == 'dev/dev-california' 
     needs: [Build]
     runs-on: ubuntu-latest
@@ -54,6 +54,7 @@ jobs:
         run: |
           echo $REPO_NAME/api
           echo $DEV_URL
+          echo "${{ env.MY_VARIABLE }}
           echo ${{ env.MY_ENV_VAR }}
           echo ${{ env.DEV_URL }}
           echo "${{ steps.buildnumber.outputs.TEST_URL }}"
