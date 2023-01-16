@@ -35,6 +35,18 @@ jobs:
           echo ${{ env.MY_VARIABLE }}
           echo '${{ env.MY_VARIABLE }}'
           echo ${{ env.DEV_URL }}
+       
+      - name: Set env variables for dev-banglore
+        if: github.head_ref == 'dev/dev-banglore'
+        env: 
+          DEV_URL : https://dev2.test.com
+        run: |
+          echo ${{ env.DEV_URL }}
+      
+      - name: print common variable
+        run: echo ${{ env.DEV_URL }}
+      
+        
           
           
   dump_contexts_to_log:
