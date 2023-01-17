@@ -25,7 +25,7 @@ jobs:
           if [ "${{ github.head_ref }}" == "dev/dev-arizona" ]
           then
             echo "test=dev-arizona" >> $GITHUB_OUTPUT
-          elif [ "${{ github.head_ref }}" == "dev/dev-banglore" ]
+          else [ "${{ github.head_ref }}" == "dev/dev-banglore" ]
             echo "test=dev-banglore" >> $GITHUB_OUTPUT
           fi
             
