@@ -95,4 +95,37 @@ jobs:
       name: ${{ github.head_ref }}
       url: '${{ env.MY_ENV_VAR }}'
     steps:
-      - 
+      - name: Deploy to ${{ github.event.repository.name }}
+        run: |
+          echo $REPO_NAME/api
+          echo $DEV_URL
+          echo "${{ env.MY_VARIABLE }}"
+          echo ${{ env.MY_ENV_VAR }}
+          echo ${{ env.DEV_URL }}
+          echo "${{ steps.buildnumber.outputs.TEST_URL }}"
+          
+          
+    
+  DeployStaging:
+    name: Deploy to QA1 
+    if: github.event_name == 'pull_request' && github.base_ref == 'Release'
+    needs: [Build]
+    runs-on: ubuntu-latest
+    environment: 
+      name: qa1
+      url: ${{ env.DEMO_URL }}
+    steps:
+      - name: Deploy
+        run: echo I am deploying! 
+
+  DeployProd:
+    name: Deploy to Production
+    if: github.event.ref == 'refs/heads/main'
+    needs: [DeployStaging]
+    runs-on: ubuntu-latest
+    environment: 
+      name: Production
+      url: 'http://www.myapp.com'
+    steps:
+      - name: Deploy
+        run: echo I am deploying! 
