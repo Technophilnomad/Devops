@@ -47,8 +47,7 @@ jobs:
           echo ${{ env.DEV_URL }}
           echo "::set-output name=test::world"
       
-      - name: print common variable
-        if: ${{ (needs.build.outputs.devEnv == 'dev1') }}
+      - name: print common variable ${{ needs.build.outputs.devEnv }}
         run: |
           echo ${{ env.DEV_URL }}
           echo $GITHUB_ENV
