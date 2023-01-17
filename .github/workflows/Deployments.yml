@@ -21,9 +21,11 @@ jobs:
       output2: ${{ steps.step2.outputs.test }}
     steps:
       - id: step1
-        run: echo "test=dev-arizona" >> $GITHUB_OUTPUT
-      - id: step2
-        run: echo "test=dev-banglore" >> $GITHUB_OUTPUT
+        run: |
+          if [ "${{ github.head_ref }}" == "refs/heads/dev/dev-arizona" ] then
+            echo "test=dev-arizona" >> $GITHUB_OUTPUT
+      #- id: step2
+      # run: echo "test=dev-banglore" >> $GITHUB_OUTPUT
   job2:
     runs-on: ubuntu-latest
     needs: job1
