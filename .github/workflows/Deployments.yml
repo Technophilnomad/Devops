@@ -19,12 +19,11 @@ jobs:
       devEnv: ${{ steps.step1.outputs.test }}
     steps:
       - uses: actions/checkout@v2
-        id: step1
       - name: Compile
         run: echo Hello, world! github ref is $GITHUB_REF and event ref ${{ github.ref }} and ${{ github.base_ref}} end
         
       - name: Set env variables
-        id: buildnumber
+        id: step1
         if: github.head_ref == 'dev/dev-arizona'
         env: 
           DEV_URL : https://dev1.test.com
@@ -34,7 +33,7 @@ jobs:
           elif [ "${{ github.head_ref }}" == "refs/heads/dev/dev-banglore" ]; then
             echo "::set-env name=MY_VARIABLE::dev2.example.com"
           fi
-          echo "::set-output name=test::hello"
+          echo "::set-output name=test::dev1"
           echo "{test}={hello}" >> $GITHUB_OUTPUT
           echo ${{ env.MY_VARIABLE }}
           echo '${{ env.MY_VARIABLE }}'
