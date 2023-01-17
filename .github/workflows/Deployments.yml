@@ -22,7 +22,8 @@ jobs:
     steps:
       - id: step1
         run: |
-          if [ "${{ github.head_ref }}" == "refs/heads/dev/dev-arizona" ] then
+          if [ "${{ github.head_ref }}" == "dev/dev-arizona" ]
+          then
             echo "test=dev-arizona" >> $GITHUB_OUTPUT
       #- id: step2
       # run: echo "test=dev-banglore" >> $GITHUB_OUTPUT
