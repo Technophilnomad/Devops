@@ -3,7 +3,7 @@ name: Feature Branch Sync Check
 on:
   pull_request:
     branches:
-      - release
+      - Release
 
 jobs:
   check_sync:
