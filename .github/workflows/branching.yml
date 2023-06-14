@@ -19,7 +19,7 @@ jobs:
       - name: Compare with Dev Branch
         run: |
           git checkout ${{ github.event.pull_request.head.ref }}
-          git merge-base --is-ancestor origin/develop ${{ github.event.pull_request.head.ref }}
+          git merge-base --is-ancestor ${{ github.event.pull_request.head.ref }} origin/develop
           sync_check_result=$?
           if [ $sync_check_result -eq 0 ]; then
             echo "Feature branch is up to date with the dev branch."
