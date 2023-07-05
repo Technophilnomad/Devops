@@ -19,11 +19,16 @@ jobs:
       - name: Compare with Dev Branch
         run: |
           git checkout ${{ github.event.pull_request.head.ref }}
-          git merge-base --is-ancestor ${{ github.event.pull_request.head.ref }} origin/develop
-          sync_check_result=$?
-          if [ $sync_check_result -eq 0 ]; then
+          if git merge-base --is-ancestor ${{ github.event.pull_request.head.ref }} origin/develop; then
             echo "Feature branch is up to date with the dev branch."
           else
-            echo "Feature branch is not up to date with the dev branch."
-            exit 1
+            git merge-base --is-ancestor ${{ github.event.pull_request.head.ref }} $(git rev-parse origin/develop)^..origin/develop
+            sync_check_result=$?
+            if [ $sync_check_result -eq 0 ]; then
+              echo "Feature branch is up to date with the squashed commits on the dev branch."
+            else
+              echo "Feature branch is not up to date with the dev branch or the squashed commits on the dev branch."
+              exit 1
+            fi
           fi
+
