@@ -1,0 +1,86 @@
+name: CI + CD
+
+on:
+  push:
+    branches: [ Release ]
+  pull_request:
+    branches: [ Release ]
+  workflow_dispatch:
+
+env:
+  NODE_ENV: ${{ secrets.NODE_ENV }}
+  REPO_NAME: ${{ github.event.repository.name }}
+  DEMO_URL: 'http://test.myapp.com'
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Compile
+        run: echo Hello, world! github ref is $GITHUB_REF and event ref ${{ github.ref }} and ${{ github.base_ref}} end
+        
+      - name: Set env variables
+        id: buildnumber
+        if: github.head_ref == 'dev/dev-arizona'
+        env: 
+          DEV_URL : https://dev1.test.com
+        run: |
+          DEV_URL=$DEV_URL
+          echo "::set-output name=TEST_URL::$(date)"
+          echo $DEV_URL
+          echo "{DEV_URL}={https://www.example.com}" >> $GITHUB_ENV
+          echo ${{ env.MY_ENV_VAR }}
+          
+          
+  dump_contexts_to_log:
+    needs: [Build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump GitHub context
+        id: github_context_step
+        run: echo '${{ toJSON(github) }}'
+  DeployDev:
+    name: Deploy to Dev ${{ github.head_ref }}
+    if: github.event_name == 'pull_request' && github.head_ref == 'dev/dev-arizona' || github.head_ref == 'dev/dev-banglore' || github.head_ref == 'dev/dev-california' 
+    needs: [Build]
+    runs-on: ubuntu-latest
+    environment: 
+      name: ${{ github.head_ref }}
+      url: '${{ env.MY_ENV_VAR }}'
+    steps:
+      - name: Deploy to ${{ github.event.repository.name }}
+        run: |
+          echo $REPO_NAME/api
+          echo $DEV_URL
+          echo ${{ env.MY_ENV_VAR }}
+          echo ${{ env.DEV_URL }}
+          echo "${{ steps.buildnumber.outputs.TEST_URL }}"
+          
+          
+    
+  DeployStaging:
+    name: Deploy to QA1 
+    if: github.event_name == 'pull_request' && github.base_ref == 'Release'
+    needs: [Build]
+    runs-on: ubuntu-latest
+    environment: 
+      name: qa1
+      url: ${{ env.DEMO_URL }}
+    steps:
+      - name: Deploy
+        run: echo I am deploying! 
+            
+  DeployProd:
+    name: Deploy to Production
+    if: github.event.ref == 'refs/heads/main'
+    needs: [DeployStaging]
+    runs-on: ubuntu-latest
+    environment: 
+      name: Production
+      url: 'http://www.myapp.com'
+    steps:
+      - name: Deploy
+        run: echo I am deploying! 
+    
