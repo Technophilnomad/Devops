@@ -1,0 +1,11 @@
+name: Call Reusable Demo Workflow
+
+on: workflow_dispatch
+
+jobs:
+  call-reusable-workflow:
+    uses: your-username/your-repository/.github/workflows/reusable_demo_workflow.yml@main
+    with:
+      aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      example-input: 'Hello, world!'
