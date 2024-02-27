@@ -4,9 +4,13 @@ on: [push, workflow_dispatch]
 
 jobs:
   call-reusable-workflow:
-    uses: Technophilnomad/Devops/.github/workflows/reusable_demo_workflow.yml@main
-    with:
-      example-input: ${{ vars.TEST_VAR }}
-    secrets:
-      aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    environment: reusableWorkflow
+    runs-on: ubuntu-latest
+    steps:
+      - name: trigger reusable workflow
+        uses: Technophilnomad/Devops/.github/workflows/reusable_demo_workflow.yml@main
+        with:
+          example-input: ${{ vars.TEST_VAR }}
+        secrets:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
