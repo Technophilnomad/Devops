@@ -2,15 +2,14 @@ name: Reusable Demo Workflow
 
 on:
   workflow_call:
-    inputs:
+    secrets:
       aws-access-key-id:
         description: AWS Access Key ID
         required: true
-        type: secret
       aws-secret-access-key:
         description: AWS Secret Access Key
         required: true
-        type: secret
+    inputs:
       example-input:
         description: Example input for demonstration
         required: true
